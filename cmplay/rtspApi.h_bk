@@ -1,0 +1,25 @@
+#ifndef _RTSPAPI_H__
+#define _RTSPAPI_H__
+
+#include "CommonDefine.h"
+typedef  unsigned long RTSP_HANDLE ;
+
+typedef enum _E_PARAM_TYPE
+{
+	E_TYPE_PLAY_RANGE = 1,
+};
+
+RTSP_HANDLE RTSP_Login(const char *pUrl, char *pcUser, char *pcPasswd);
+int RTSP_Logout(RTSP_HANDLE RHandle);
+int RTSP_OpenStream(RTSP_HANDLE RHandle, int iRtpProtocol, PF_RTP_SET_VIDEO_DATA_CALLBACK pfRtpSetDataCB, void *pUserData);
+int RTSP_CloseStream(RTSP_HANDLE RHandle);
+int RTSP_SendHeart(RTSP_HANDLE RHandle);
+int RTSP_PlayControl(RTSP_HANDLE RHandle,int iCmd, double dValue);
+int RTSP_GetRtspTimeout(RTSP_HANDLE RHandle);
+int RTSP_GetServIpAddr(RTSP_HANDLE RHandle, char *pcIpAddr, int iLen);
+int RTSP_GetParam(RTSP_HANDLE RHandle, int iType, void *pValue);
+int RTSP_GetConnect(RTSP_HANDLE RHandle);
+
+
+
+#endif

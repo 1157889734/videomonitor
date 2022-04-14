@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C0E1CC5A-0485-48DB-8530-4888F5D67AC2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CmPlay</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)build\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CMPLAY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\include\UsageEnvironment;.\include\liveMedia;.\include\groupsock;.\include\BasicUsageEnvironment;.\Include\FFmpeg_SDK</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../lib;./lib;./lib/FFmpeg_SDK_4.0;./lib/DX;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>BasicUsageEnvironment.lib;groupsock.lib;liveMedia.lib;UsageEnvironment.lib;Ws2_32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;ddraw.lib;dhplay.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>
+      </ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CMPLAY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\include\FFmpeg_SDK;.\include\UsageEnvironment;.\include\liveMedia;.\include\groupsock;.\include\BasicUsageEnvironment;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <AdditionalDependencies>BasicUsageEnvironment.lib;groupsock.lib;liveMedia.lib;UsageEnvironment.lib;Ws2_32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;ddraw.lib;dhplay.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/DX;./lib/FFmpeg_SDK_4.0;./lib;../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Base64EncDec.cpp" />
+    <ClCompile Include="CMPlayerInterface.cpp" />
+    <ClCompile Include="debug.cpp" />
+    <ClCompile Include="display.cpp" />
+    <ClCompile Include="ffmpeg_dxva2.cpp" />
+    <ClCompile Include="FisheyeCorrect.cpp" />
+    <ClCompile Include="md5.cpp" />
+    <ClCompile Include="mutex.cpp" />
+    <ClCompile Include="rtcp.cpp" />
+    <ClCompile Include="rtp.cpp" />
+    <ClCompile Include="rtsp.cpp" />
+    <ClCompile Include="rtspApi.cpp" />
+    <ClCompile Include="rtspComm.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="vdec.cpp" />
+    <ClCompile Include="VideoFileSink.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base64EncDec.h" />
+    <ClInclude Include="CMPlayerInterface.h" />
+    <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="debug.h" />
+    <ClInclude Include="dhplay.h" />
+    <ClInclude Include="display.h" />
+    <ClInclude Include="ffmpeg_dxva2.h" />
+    <ClInclude Include="FileFishEye.h" />
+    <ClInclude Include="FisheyeCorrect.h" />
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="mutex.h" />
+    <ClInclude Include="rtcp.h" />
+    <ClInclude Include="rtp.h" />
+    <ClInclude Include="rtsp.h" />
+    <ClInclude Include="rtspApi.h" />
+    <ClInclude Include="rtspComm.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="vdec.h" />
+    <ClInclude Include="VideoFileSink.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicUsageEnvironment\BasicUsageEnvironment.vcxproj">
+      <Project>{9758e63c-fa68-444e-8641-1be2edd981ea}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

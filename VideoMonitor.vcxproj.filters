@@ -1,0 +1,868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="MainProcess">
+      <UniqueIdentifier>{527e7338-0e07-4372-af03-d3487548fcc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cmplay">
+      <UniqueIdentifier>{89483017-e6b2-4bf2-960f-490c0d7457e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NVRMsg">
+      <UniqueIdentifier>{231ce8f8-67d0-444f-bded-abda48690f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FTP">
+      <UniqueIdentifier>{89c3ebc3-6f8a-46cf-a583-2f15d37cd5c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIFileRes">
+      <UniqueIdentifier>{cb5bb3f8-c992-40c0-863e-26e7404799c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="temp\moc\moc_workerthread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_imag.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workerthread.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="mainsdk.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="NVRMsgProc.cxx">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobleDefine.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="pmsgcli.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="datetimesetwidget.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_datetimesetwidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_Keyboard.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginSystem.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_LoginSystem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_mainwindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MySystem.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_MySystem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="singleform.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_singleform.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleVideo.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_SingleVideo.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserMonitor.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_UserMonitor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserRegister.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_UserRegister.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\moc\moc_mainsdk.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ftp\gb2312_utf8.cpp">
+      <Filter>FTP</Filter>
+    </ClCompile>
+    <ClCompile Include="ftp\ftpApi.cpp">
+      <Filter>FTP</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\state\state.c">
+      <Filter>NVRMsg</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>MainProcess</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SDK\CMPlayer\CommonDefine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobleDefine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\state\fileConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\state\state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\CMPlayer\CMPlayerInterface.h">
+      <Filter>Cmplay</Filter>
+    </ClInclude>
+    <ClInclude Include="NVRMsgProc.h">
+      <Filter>MainProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="pmsgcli.h">
+      <Filter>MainProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>MainProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_datetimesetwidget.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_Keyboard.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_LoginSystem.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_MySystem.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_singleform.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_SingleVideo.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_UserMonitor.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_UserRegister.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_VisitorMonitor.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ftp\gb2312_utf8.h">
+      <Filter>FTP</Filter>
+    </ClInclude>
+    <ClInclude Include="ftp\ftpApi.h">
+      <Filter>FTP</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>MainProcess</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="workerthread.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="datetimesetwidget.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="datetimesetwidget.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Keyboard.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Keyboard.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LoginSystem.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LoginSystem.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MySystem.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MySystem.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="singleform.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="singleform.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SingleVideo.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SingleVideo.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UserMonitor.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UserMonitor.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UserRegister.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UserRegister.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+    <CustomBuild Include="VisitorMonitor.ui">
+      <Filter>UIFileRes</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainsdk.h">
+      <Filter>MainProcess</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="carImage\1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\1_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\1_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\2_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\2_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\3_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\3_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\4_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\4_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\5.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\5.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\5_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\5_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\6.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\6.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\6_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\6_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\7.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\7.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\7_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\7_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\8.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\8.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage\8_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="carImage_800\8_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Back_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Back_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\DayPlayBack.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\DayPlayBack.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\DayPlayBack_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\DayPlayBack_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\DeviceState.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\DeviceState.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\DeviceState_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\DeviceState_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Download.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Download.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Download_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Download_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Forward.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Forward.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Forward_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Forward_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\LastCar.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\LastCar.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\LastCar_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\LastCar_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\MetroMonitoringSystem.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\MetroMonitoringSystem.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Monitor_new.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Monitor_new.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\MonthPlayBack.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\MonthPlayBack.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\MonthPlayBack_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\MonthPlayBack_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\NextCar.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\NextCar.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\NextCar_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\NextCar_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\NextPage.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\NextPage.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\NextPage_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\NextPage_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Pantograph.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Pantograph.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Pantograph_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Pantograph_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Play.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Play.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Play_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Play_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Play_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Play_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Playback.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Playback.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Playback_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Playback_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\PollStart.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\PollStart.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\PollStart_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\PollStart_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\PollSuspend.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\PollSuspend.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\PollSuspend_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\PollSuspend_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Stop.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Stop.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Stop_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Stop_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\Stop_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\Stop_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Update.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Update.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Update_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Update_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\VideoMonitor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\VideoMonitor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\VideoMonitor_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\VideoMonitor_On.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\add.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\alarm_list.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\alarm_list.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\alarm_list_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\alarm_list_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\btn_check_off_focused_holo_light.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\btn_check_on_focused_holo_light.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\btn_radio_off_holo_light.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\btn_radio_on_holo_light.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\button.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\button.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\button.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\button.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\carriage_status_6_bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\carriage_status_6_bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\carriage_status_8_bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\carriage_status_8_bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\device_status.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\device_status.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\device_status_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\device_status_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\download.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\download.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\driver_alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\driver_alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\driver_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\driver_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\exit.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\exit.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\fast_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\fast_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\fast_back_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\fast_back_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\fast_head.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\fast_head.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\fast_head_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\fast_head_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\ico_Login.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\ico_Login.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="imag.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="Control\login.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\login.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\login_new_bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\login_new_bg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\logout.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\logout.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\next_file.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\next_file.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\next_file_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\next_file_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\nvr_alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\nvr_alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\nvr_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\nvr_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\panto_alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\panto_alarm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\panto_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\panto_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\pre_file.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\pre_file.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\pre_file_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\pre_file_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\reduce.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\save_status.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\save_status.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\save_status_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\save_status_hot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control\search.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Control_800\search.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\video.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\video.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image_800\Monitor_new_nologo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Load_nologo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="image\Monitor_new_nologo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="loco.rc">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="SDK\rtsp\rtcp.o">
+      <Filter>Distribution Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

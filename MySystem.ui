@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MySystem</class>
+ <widget class="QDialog" name="MySystem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MySystem</string>
+  </property>
+  <widget class="QPushButton" name="pushButtonCancel">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>610</y>
+     <width>144</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelTime">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>280</y>
+     <width>41</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

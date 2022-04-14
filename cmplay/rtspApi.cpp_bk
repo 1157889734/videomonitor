@@ -1,0 +1,813 @@
+//#include "Live555Api.h"
+
+#include "GroupsockHelper.hh"
+#include "VideoFileSink.h"
+#include "liveMedia.hh"
+#include "BasicUsageEnvironment.hh"
+#include <windows.h>
+#include "rtspApi.h"
+#include "mutex.h"
+
+static UsageEnvironment* g_pEnvir = NULL;
+static TaskScheduler* g_scheduler = NULL;
+static char g_chEnvEventLoop    = 0;
+static char g_cExitEvenLoop    = 0;
+static HANDLE g_live555EnvHandle = NULL;
+static CMutexLock	g_InitLock;
+
+
+static void continueAfterDESCRIBE(RTSPClient*rtspClient, int resultCode, char* resultString);
+static void continueAfterSETUP(RTSPClient* rtspClient, int resultCode, char* resultString);
+static void continueAfterPLAY(RTSPClient* rtspClient, int resultCode, char* resultString); 
+static void continueAfterTEARDOWN(RTSPClient* client, int resultCode, char* resultString);
+static void setupStreams(RTSPClient *rtspClient) ;
+static void shutdownStream(RTSPClient* rtspClient) ;
+
+static void subsessionAfterPlaying(void* clientData);
+static void subsessionByeHandler(void* clientData);
+static void streamTimerHandler(void* clientData);
+
+class OurRTSPClient: public RTSPClient {
+public:
+	static OurRTSPClient* createNew(UsageEnvironment& env, char const* rtspURL,
+		int verbosityLevel = 0,
+		char const* applicationName = NULL,
+		portNumBits tunnelOverHTTPPortNum = 0);
+
+	void SetVideoDataCbfun(PF_RTP_SET_VIDEO_DATA_CALLBACK pfSetDataCB,void *pDatabFunArg,unsigned uibufferSize = 800000);
+	void setUsernameAndPassword(char const* username,char const* password);
+protected:
+	OurRTSPClient(UsageEnvironment& env, char const* rtspURL = NULL,
+		int verbosityLevel =1, char const* applicationName=NULL, portNumBits tunnelOverHTTPPortNum=0);
+	virtual ~OurRTSPClient();
+
+public:
+	MediaSession			   *m_pSession;
+	MediaSubsessionIterator    *m_pSetupIter;
+	MediaSubsession			   *m_pSubSession;		
+	bool m_bMadeProgress;		//是否有有效值，让程序继续
+	double					   m_dduration;
+	VideoFileSink             *m_pVideoSink;
+	Authenticator			   m_Authenticator;
+	TaskToken				   m_StreamTimerTask;
+	bool					   m_bSendOptionsRequestOnly;  //只是发送一下
+	PF_RTP_SET_VIDEO_DATA_CALLBACK m_pVideoDatavbFun;
+	void					  *m_pDataCbFunArg;
+	bool					   m_bSendCmdFinished;
+	int						   m_iFileSinkBufferSize;
+	int						   m_iLoginFlag;			//0未知 1:成功  2：失败
+	int						   m_iOpenStreamFlag;		//0未知 1:成功  2：失败
+	int						   m_iPlayFlag;				//0未知 1:成功  2：失败
+	T_VIDEO_INFO			   m_tVideoInfo;
+	char					   m_acIpAddr[16];
+	bool					   m_bTcpProtocol;		   //true:tcp flase:udp
+	int						   m_iRecvTearDown;
+};
+
+OurRTSPClient* OurRTSPClient::createNew(UsageEnvironment& env, char const* rtspURL,
+	int verbosityLevel,	char const* applicationName,portNumBits tunnelOverHTTPPortNum) {
+		return new OurRTSPClient(env, rtspURL, verbosityLevel, applicationName, tunnelOverHTTPPortNum);
+}
+
+void OurRTSPClient::setUsernameAndPassword(char const* username,char const* password)
+{
+	m_Authenticator.setUsernameAndPassword(username,password);
+}
+
+void   OurRTSPClient::SetVideoDataCbfun(PF_RTP_SET_VIDEO_DATA_CALLBACK pfSetDataCB,void *pDatabFunArg,unsigned uibufferSize/* = 800000*/)
+{
+	m_pVideoDatavbFun = pfSetDataCB;
+	m_pDataCbFunArg = pDatabFunArg;
+	m_iFileSinkBufferSize = uibufferSize;
+}
+
+OurRTSPClient::OurRTSPClient(UsageEnvironment& env, char const* rtspURL,
+	int verbosityLevel, char const* applicationName, portNumBits tunnelOverHTTPPortNum)
+	: RTSPClient(env,rtspURL, verbosityLevel, applicationName, tunnelOverHTTPPortNum, -1)
+{
+	m_pSession		 = NULL;
+	m_pSetupIter     = NULL;
+	m_pSubSession    = NULL;
+	m_bMadeProgress  = FALSE;
+	m_dduration		 = 0;
+	m_pVideoDatavbFun = NULL;
+	m_pDataCbFunArg = NULL;
+	m_pVideoSink		 = NULL;
+	m_StreamTimerTask	 = NULL;
+	m_bSendCmdFinished   = FALSE;
+	m_iFileSinkBufferSize = 800000;
+	m_iLoginFlag = 0;  //0未知 1:成功  2：失败
+	m_iOpenStreamFlag = 0;//0未知 1:成功  2：失败
+	m_iPlayFlag = 0;//0未知 1:成功  2：失败
+	memset(m_acIpAddr,0,sizeof(m_acIpAddr));
+	m_bTcpProtocol = True;		   //1:tcp 0:udp
+	m_iRecvTearDown = 0;
+
+	 
+}
+
+OurRTSPClient::~OurRTSPClient() 
+{
+	if(m_pSetupIter)
+	{
+		delete m_pSetupIter;
+		m_pSetupIter = NULL;
+	}
+	
+	
+}
+
+
+static void subsessionAfterPlaying(void* clientData) {
+	MediaSubsession* subsession = (MediaSubsession*)clientData;
+	OurRTSPClient* ourRtspClient = (OurRTSPClient*)(subsession->miscPtr);
+
+
+	// Begin by closing this subsession's stream:
+	Medium::close(subsession->sink);
+	subsession->sink = NULL;
+
+	// Next, check whether *all* subsessions' streams have now been closed:
+	MediaSession& session = subsession->parentSession();
+	MediaSubsessionIterator iter(session);
+	while ((subsession = iter.next()) != NULL) {
+		if (subsession->sink != NULL) return; // this subsession is still active
+	}
+
+	// All subsessions' streams have now been closed, so shutdown the client:
+	shutdownStream(ourRtspClient);
+
+}
+
+static void subsessionByeHandler(void* clientData) {
+	MediaSubsession* subsession = (MediaSubsession*)clientData;
+	RTSPClient* rtspClient = (RTSPClient*)subsession->miscPtr;
+	UsageEnvironment& env = rtspClient->envir(); // alias
+
+	env << rtspClient << "Received RTCP \"BYE\" on \"" << subsession << "\" subsession\n";
+
+	// Now act as if the subsession had closed:
+	subsessionAfterPlaying(subsession);
+}
+
+static void continueAfterSETUP(RTSPClient* rtspClient, int resultCode, char* resultString)
+{
+
+	UsageEnvironment&  env		  	 = rtspClient->envir(); 
+	OurRTSPClient   *pOurRtspClient	 = (OurRTSPClient *)rtspClient;
+	MediaSubsession *pSubSession	 = pOurRtspClient->m_pSubSession;
+	do{
+		if (resultCode != 0)
+		{
+			env << "Failed to setup \"" << pSubSession->mediumName()
+				<< "/" << pSubSession->codecName()
+				<< "\" subsession: " << resultString << "\n";
+		} else 
+		{
+			env << "Setup \"" << pSubSession->mediumName()
+				<< "/" << pSubSession->codecName()
+				<< "\" subsession (";
+			if (pSubSession->rtcpIsMuxed()) 
+			{
+				env << "client port " << pSubSession->clientPortNum();
+			} else 
+			{
+				env << "client ports " << pSubSession->clientPortNum()
+					<< "-" << pSubSession->clientPortNum()+1;
+			}
+			env << ")\n";
+			pOurRtspClient->m_bMadeProgress = True;
+			if(strcmp(pSubSession->mediumName(),"video") == 0)
+			{		
+				pSubSession->sink = new VideoFileSink(env,pSubSession,pOurRtspClient->m_iFileSinkBufferSize);
+				if (pSubSession->sink == NULL) {
+					env << rtspClient << "Failed to create a data sink for the \"" << pSubSession
+						<< "\" subsession: " << env.getResultMsg() << "\n";
+					break;
+				}
+				pOurRtspClient->m_pVideoSink = (VideoFileSink *) pSubSession->sink;
+				if(pOurRtspClient->m_pVideoDatavbFun)
+				{
+					pOurRtspClient->m_pVideoSink->SetRtpSetDataCBfun(pOurRtspClient->m_pVideoDatavbFun,pOurRtspClient->m_pDataCbFunArg);
+				}
+			}		
+			else
+			{
+				break;
+			}
+			env << rtspClient << "Created a data sink for the \"" << pSubSession << "\" subsession\n";
+			pSubSession->miscPtr = rtspClient; // a hack to let subsession handler functions get the "RTSPClient" from the subsession 
+			pSubSession->sink->startPlaying(*(pSubSession->readSource()),
+				subsessionAfterPlaying, pSubSession);
+			// Also set a handler to be called if a RTCP "BYE" arrives for this subsession:
+			if (pSubSession->rtcpInstance() != NULL) {
+				//pSubSession->rtcpInstance()->setByeHandler(subsessionByeHandler, pSubSession);
+				pSubSession->rtcpInstance()->setByeHandler(NULL, NULL);
+			}
+		}
+	}while(0);
+	delete[] resultString;
+
+	//if (client != NULL) sessionTimeoutParameter = client->sessionTimeoutParameter();
+
+	// Set up the next subsession, if any:
+	setupStreams(rtspClient);
+}
+static void streamTimerHandler(void* clientData) {
+	OurRTSPClient* ourRtspClient = (OurRTSPClient*)clientData;
+	UsageEnvironment& env = ourRtspClient->envir(); // alias
+
+	ourRtspClient->m_StreamTimerTask = NULL;
+
+	// Shut down the stream:
+	shutdownStream((RTSPClient* )ourRtspClient);
+}
+
+static void continueAfterPLAY(RTSPClient* rtspClient, int resultCode, char* resultString) {
+	Boolean success = False;
+	UsageEnvironment& env = rtspClient->envir(); // alias
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)rtspClient;
+	do {
+		if (resultCode != 0) {
+			env << pOurRtspClient << "Failed to start playing session: " << resultString << "\n";
+			break;
+		}
+
+		// Set a timer to be handled at the end of the stream's expected duration (if the stream does not already signal its end
+		// using a RTCP "BYE").  This is optional.  If, instead, you want to keep the stream active - e.g., so you can later
+		// 'seek' back within it and do another RTSP "PLAY" - then you can omit this code.
+		// (Alternatively, if you don't want to receive the entire stream, you could set this timer for some shorter value.)
+		if (pOurRtspClient->m_dduration > 0) {
+			unsigned const delaySlop = 2; // number of seconds extra to delay, after the stream's expected duration.  (This is optional.)
+			pOurRtspClient->m_dduration += delaySlop;
+			unsigned uSecsToDelay = (unsigned)(pOurRtspClient->m_dduration*1000000);
+			//pOurRtspClient->m_StreamTimerTask = env.taskScheduler().scheduleDelayedTask(uSecsToDelay, (TaskFunc*)streamTimerHandler, pOurRtspClient);
+		}
+
+		//env << pOurRtspClient << "Started playing session";
+		//if (pOurRtspClient->m_dduration > 0) {
+		//	env << " (for up to " << pOurRtspClient->m_dduration << " seconds)";
+		//}
+		//env << "...\n";
+
+		success = True;
+	} while (0);
+	delete[] resultString;
+
+	if (!success) {
+		// An unrecoverable error occurred with this stream.
+		shutdownStream(rtspClient);
+	}
+	pOurRtspClient->m_bSendCmdFinished = True;
+	
+	pOurRtspClient->m_iOpenStreamFlag = 1;
+}
+
+void continueAfterTEARDOWN(RTSPClient* rtspClient, int /*resultCode*/, char* resultString) 
+{
+	if(resultString)
+	{
+		delete[] resultString;
+	}
+	OurRTSPClient   *pOurRtspClient		= (OurRTSPClient *)rtspClient;
+	if(pOurRtspClient)
+	{
+		pOurRtspClient->m_iRecvTearDown =1;
+		/*shutdownStream(pOurRtspClient);		
+		if(pOurRtspClient->m_pSession)
+		{
+			RTSPClient::close(pOurRtspClient->m_pSession);
+			pOurRtspClient->m_pSession = NULL;
+		}
+		OurRTSPClient::close(rtspClient);*/
+	}
+	
+}
+
+static void setupStreams(RTSPClient *rtspClient) {
+	UsageEnvironment& env				= rtspClient->envir(); // alias
+	OurRTSPClient   *pOurRtspClient		= (OurRTSPClient *)rtspClient;
+	MediaSubsession *pMsubSession       = NULL;
+
+	if (pOurRtspClient->m_pSetupIter == NULL) 
+	{
+		pOurRtspClient->m_pSetupIter = new MediaSubsessionIterator(*pOurRtspClient->m_pSession);
+
+		while ((pMsubSession = pOurRtspClient->m_pSetupIter->next()) != NULL) {
+			// We have another subsession left to set up:
+
+			if (pMsubSession->clientPortNum() == 0) continue; // port # was not set
+			pOurRtspClient->sendSetupCommand(*pMsubSession, continueAfterSETUP, False, pOurRtspClient->m_bTcpProtocol, false);
+			pOurRtspClient->m_pSubSession = pMsubSession;
+			return;
+		}
+	}
+	else
+	{
+		if (!pOurRtspClient->m_bMadeProgress) 
+		{
+			shutdownStream(rtspClient);
+			pOurRtspClient->m_iOpenStreamFlag = 2;
+			return;
+		}
+
+		// We've finished setting up all of the subsessions.  Now, send a RTSP "PLAY" command to start the streaming:
+		if (pOurRtspClient->m_pSession->absStartTime() != NULL) {
+			// Special case: The stream is indexed by 'absolute' time, so send an appropriate "PLAY" command:
+			pOurRtspClient->sendPlayCommand(*pOurRtspClient->m_pSession, continueAfterPLAY, pOurRtspClient->m_pSession->absStartTime(), pOurRtspClient->m_pSession->absEndTime());
+		} else {
+			pOurRtspClient->m_dduration = pOurRtspClient->m_pSession->playEndTime() - pOurRtspClient->m_pSession->playStartTime();
+			pOurRtspClient->sendPlayCommand(*pOurRtspClient->m_pSession, continueAfterPLAY);
+		}
+	}
+}
+
+
+static void shutdownStream(RTSPClient* rtspClient) 
+{
+	UsageEnvironment& env = rtspClient->envir(); // alias
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)rtspClient;
+	MediaSession  *pSession = pOurRtspClient->m_pSession;
+
+	if(pOurRtspClient->m_StreamTimerTask)
+	{
+		env.taskScheduler().unscheduleDelayedTask(pOurRtspClient->m_StreamTimerTask);
+	}
+	// First, check whether any subsessions have still to be closed:
+	if (pSession != NULL) { 
+		MediaSubsessionIterator iter(*pSession);
+		MediaSubsession* pSubsession;
+		Boolean someSubsessionsWereActive = False;
+
+		while ((pSubsession = iter.next()) != NULL) {
+			if (pSubsession->sink != NULL) 
+			{
+			
+				g_InitLock.Lock();
+				g_cExitEvenLoop = 0;
+				g_chEnvEventLoop = 0xFF;
+
+				while(0 == g_cExitEvenLoop)
+				{
+					;
+				}
+				Medium::close(pSubsession->sink);
+				pSubsession->sink = NULL;
+
+				g_cExitEvenLoop = 0;
+				g_chEnvEventLoop = 0;
+				g_InitLock.Unlock();
+				if (pSubsession->rtcpInstance() != NULL) {
+					pSubsession->rtcpInstance()->setByeHandler(NULL, NULL); // in case the server sends a RTCP "BYE" while handling "TEARDOWN"
+				}
+				
+				someSubsessionsWereActive = true;
+			}
+		}
+
+		if (True == someSubsessionsWereActive) {
+			// Send a RTSP "TEARDOWN" command, to tell the server to shutdown the stream.
+			// Don't bother handling the response to the "TEARDOWN".
+			rtspClient->sendTeardownCommand(*pOurRtspClient->m_pSession, NULL);
+		}
+				
+	}
+	
+	pOurRtspClient->m_bSendCmdFinished = True;
+}
+
+
+static void continueAfterDESCRIBE(RTSPClient* rtspClient, int resultCode, char* resultString) {
+
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)rtspClient;
+	MediaSession  *pSession		  = pOurRtspClient->m_pSession;
+	UsageEnvironment& env		  = pOurRtspClient->envir(); // alias
+	if (resultCode != 0) {
+		
+		env<< "Failed to get a SDP description for the URL \"" << pOurRtspClient->url() << "\": " << resultString << "\n";
+				delete[] resultString;
+		shutdownStream(rtspClient);
+		pOurRtspClient->m_iLoginFlag = 2;
+		
+		return;
+	}
+	char* sdpDescription = resultString;
+	env<< "Opened URL \"" << pOurRtspClient->url() << "\", returning a SDP description:\n" << sdpDescription << "\n";
+
+	// Create a media session object from this SDP description:
+	pOurRtspClient->m_pSession = MediaSession::createNew(rtspClient->envir(), sdpDescription);
+	delete[] sdpDescription;
+	if (pOurRtspClient->m_pSession == NULL) {
+		env << "Failed to create a MediaSession object from the SDP description: " << env.getResultMsg() << "\n";
+		pOurRtspClient->m_iLoginFlag = 2;
+		shutdownStream(rtspClient);
+		return;
+	} else if (!pOurRtspClient->m_pSession->hasSubsessions()) {
+		env << "This session has no media subsessions (i.e., no \"m=\" lines)\n";
+		pOurRtspClient->m_iLoginFlag = 2;
+		shutdownStream(rtspClient);
+		return;
+	}
+	// Then, setup the "RTPSource"s for the session:
+	MediaSubsessionIterator iter(*pOurRtspClient->m_pSession);
+	MediaSubsession *subsession;
+	Boolean madeProgress = False;
+	char const* singleMediumToTest = "video";
+	while ((subsession = iter.next()) != NULL) {
+		// If we've asked to receive only a single medium, then check this now:
+		if (singleMediumToTest != NULL) {
+			if (strcmp(subsession->mediumName(), singleMediumToTest) != 0) {
+				env<< "Ignoring \"" << subsession->mediumName()
+					<< "/" << subsession->codecName()
+					<< "\" subsession, because we've asked to receive a single " << singleMediumToTest
+					<< " session only\n";
+				continue;
+			} else {
+				// Receive this subsession only
+				singleMediumToTest = "xxxxx";
+				// this hack ensures that we get only 1 subsession of this type
+			}
+		}
+		if (!subsession->initiate()) {
+			env << "Failed to initiate the \"" << subsession << "\" subsession: " << env.getResultMsg() << "\n";
+		} else {
+			env << "Created receiver for \"" << subsession->mediumName()
+				<< "/" << subsession->codecName() << "\" subsession (";
+			if (subsession->rtcpIsMuxed()) {
+				env << "client port " << subsession->clientPortNum();
+			} else {
+				env << "client ports " << subsession->clientPortNum()
+					<< "-" << subsession->clientPortNum()+1;
+			}
+			env << ")\n";
+			madeProgress = True;
+			if (subsession->rtpSource() != NULL) {
+				// Because we're saving the incoming data, rather than playing
+				// it in real time, allow an especially large time threshold
+				// (1 second) for reordering misordered incoming packets:
+				unsigned const thresh = 1000000; // 1 second
+				subsession->rtpSource()->setPacketReorderingThresholdTime(thresh);
+
+				// Set the RTP source's OS socket buffer size as appropriate - either if we were explicitly asked (using -B),
+				// or if the desired FileSink buffer size happens to be larger than the current OS socket buffer size.
+				// (The latter case is a heuristic, on the assumption that if the user asked for a large FileSink buffer size,
+				// then the input data rate may be large enough to justify increasing the OS socket buffer size also.)
+					int socketNum = subsession->rtpSource()->RTPgs()->socketNum();
+					unsigned curBufferSize = getReceiveBufferSize(env, socketNum);
+					if ( pOurRtspClient->m_iFileSinkBufferSize > curBufferSize) {
+						unsigned newBufferSize =  pOurRtspClient->m_iFileSinkBufferSize;
+						newBufferSize = setReceiveBufferTo(pOurRtspClient->envir(), socketNum, newBufferSize);
+					}
+				}
+			}
+	}
+	if (!madeProgress) 
+	{
+		shutdownStream(rtspClient);
+		pOurRtspClient->m_iLoginFlag = 2;
+		return;
+	}
+	else
+	{
+		pOurRtspClient->m_iLoginFlag = 1;
+		return ;
+	}
+
+	// Perform additional 'setup' on each subsession, before playing them:
+	setupStreams(rtspClient);
+}
+
+
+static void continueAfterOPTIONS(RTSPClient*rtspClient, int resultCode, char* resultString) {
+
+	OurRTSPClient *ourRtspClient = (OurRTSPClient*) rtspClient;
+
+	if (ourRtspClient->m_bSendOptionsRequestOnly) {
+		if (resultCode != 0) {
+			rtspClient->envir() << rtspClient << " \"OPTIONS\" request failed: " << resultString << "\n";
+		} else {
+			rtspClient->envir()<< rtspClient << " \"OPTIONS\" request returned: " << resultString << "\n";
+		}
+		shutdownStream(rtspClient);
+	}
+	delete[] resultString;
+	ourRtspClient->sendDescribeCommand(continueAfterDESCRIBE);
+
+}
+
+int EventLoopProc(void *argv)
+{
+	//OurRTSPClient *pOurRtspClient = (OurRTSPClient*) argv;
+	//pOurRtspClient->m_pEnvir->taskScheduler().doEventLoop(&pOurRtspClient->m_chEnvEventLoop);
+	while(1)
+	{
+		g_pEnvir->taskScheduler().doEventLoop(&g_chEnvEventLoop);
+		if(0 == g_cExitEvenLoop)
+		{
+			g_cExitEvenLoop = 1;
+		}
+	}
+	return 0;
+}
+
+static int ParseRtspUrl(const char *pcRawUrl, char *pIp)
+{
+	char acStr[256];
+	char *pcTmp = NULL;
+	char *pcNextTmp = NULL;
+	char *pcPos = NULL;
+	char *pcContent = NULL;
+	char *pcIpaddr = NULL;
+	int iPos = 0;
+
+
+	if ((NULL == pcRawUrl) || (NULL == pIp) )
+	{
+		return -1;	
+	}
+	memset(acStr, 0, sizeof(acStr));
+	strncpy(acStr, pcRawUrl, sizeof(acStr));
+
+	/* rtsp:// */
+
+	pcContent = acStr + 7;
+	pcTmp = strtok_s(pcContent, "/",&pcNextTmp);
+
+	if (pcTmp)
+	{
+		pcPos = pcTmp;
+		pcTmp = strtok_s(pcPos, ":",&pcNextTmp);
+
+		if (pcTmp)
+		{
+			strcpy(pIp, pcTmp);
+		}
+		else
+		{
+			strcpy(pIp, pcPos);
+		}
+
+	}
+
+	return 0;
+}
+
+
+
+RTSP_HANDLE RTSP_Login(const char *pUrl, char *pcUser, char *pcPasswd)
+{
+	OurRTSPClient *pOurRtspClient = NULL;
+	int i =0;
+
+	g_InitLock.Lock();
+	if(NULL == g_pEnvir)
+	{
+		g_scheduler = BasicTaskScheduler::createNew();
+		g_pEnvir = BasicUsageEnvironment::createNew(*g_scheduler);
+		g_live555EnvHandle = CreateThread(NULL,0,(LPTHREAD_START_ROUTINE)EventLoopProc,(void *)NULL,0,NULL);
+	}
+	
+	
+	pOurRtspClient = OurRTSPClient::createNew(*g_pEnvir, pUrl, 0, NULL);
+	if (pOurRtspClient == NULL) {
+		*g_pEnvir<< "Failed to create " << pUrl << " client: " <<g_pEnvir->getResultMsg() << "\n";
+		g_InitLock.Unlock();
+		return NULL;
+	}  
+	ParseRtspUrl(pUrl,pOurRtspClient->m_acIpAddr);
+	pOurRtspClient->setUserAgentString("cftc");
+	pOurRtspClient->setUsernameAndPassword(pcUser,pcPasswd);
+	pOurRtspClient->sendDescribeCommand(continueAfterDESCRIBE, &pOurRtspClient->m_Authenticator);//OPTIONS可有可无
+	
+	g_InitLock.Unlock();
+	while(0 == pOurRtspClient->m_iLoginFlag && i<300)
+	{
+		Sleep(10);
+		i++;
+	}
+	if(1 == pOurRtspClient->m_iLoginFlag)
+	{
+		OutputDebugStringA("succ\n");
+		
+		return (RTSP_HANDLE) pOurRtspClient;	
+	}
+	else
+	{
+		OutputDebugStringA("fail\n");
+		g_InitLock.Lock();
+		g_cExitEvenLoop = 0;
+		g_chEnvEventLoop = 0xFF;
+
+		while(0 == g_cExitEvenLoop)
+		{
+			;
+		}
+		OurRTSPClient::close(pOurRtspClient);
+		g_chEnvEventLoop = 0;
+		g_cExitEvenLoop = 0;
+		g_InitLock.Unlock();
+		return NULL;
+	}
+}
+
+int RTSP_Logout(RTSP_HANDLE RHandle)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+	//while (!pOurRtspClient->m_bSendCmdFinished)
+	//{
+	//	Sleep(5);
+	//}
+	//g_InitLock.Lock();
+	//pOurRtspClient->m_chEnvEventLoop = 0xff;
+	
+	shutdownStream(pOurRtspClient);
+	if(pOurRtspClient->m_pSession)
+	{
+		g_InitLock.Lock();
+		g_cExitEvenLoop = 0;
+		g_chEnvEventLoop = 0xFF;
+
+		while(0 == g_cExitEvenLoop)
+		{
+			;
+		}
+		RTSPClient::close(pOurRtspClient->m_pSession);
+		pOurRtspClient->m_pSession = NULL;
+		OurRTSPClient::close(pOurRtspClient);
+
+		g_chEnvEventLoop = 0;
+		g_cExitEvenLoop = 0;
+		g_InitLock.Unlock();
+		return 0;
+	}
+	
+	g_InitLock.Lock();
+	g_cExitEvenLoop = 0;
+	g_chEnvEventLoop = 0xFF;
+	while(0 == g_cExitEvenLoop)
+	{
+		;
+	}
+	OurRTSPClient::close(pOurRtspClient);
+	g_chEnvEventLoop = 0;
+	g_cExitEvenLoop = 0;
+	
+	g_InitLock.Unlock();
+	return 0;
+}
+
+int RTSP_OpenStream(RTSP_HANDLE RHandle, int iRtpProtocol, PF_RTP_SET_VIDEO_DATA_CALLBACK pfRtpSetDataCB, void *pUserData)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+	if(iRtpProtocol == TCP)
+	{
+		pOurRtspClient->m_bTcpProtocol = true;
+	}
+	else
+	{
+		pOurRtspClient->m_bTcpProtocol = false;
+	}
+	pOurRtspClient->SetVideoDataCbfun(pfRtpSetDataCB,pUserData);
+	setupStreams(pOurRtspClient);
+	while(0 == pOurRtspClient->m_iOpenStreamFlag)
+	{
+		Sleep(5);
+	}
+	if(1 == pOurRtspClient->m_iOpenStreamFlag)
+	{
+		return 0;	
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int RTSP_CloseStream(RTSP_HANDLE RHandle)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+	
+	if(pOurRtspClient->m_pSession)
+	{
+		//pOurRtspClient->m_bSendCmdFinished =false; 
+		//pOurRtspClient->sendTeardownCommand(*pOurRtspClient->m_pSession, continueAfterTEARDOWN);
+	}
+	
+	return 0;
+}
+
+int RTSP_SendHeart(RTSP_HANDLE RHandle)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+	if(pOurRtspClient->m_pSession)
+	{
+		pOurRtspClient->sendGetParameterCommand(*pOurRtspClient->m_pSession, NULL,NULL);
+		
+	}
+	return 0;
+}
+
+int RTSP_PlayControl(RTSP_HANDLE RHandle,int iCmd, double dValue)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+	if(E_PLAY_STATE_PLAY == iCmd)
+	{
+		pOurRtspClient->sendPlayCommand(*pOurRtspClient->m_pSession, NULL);
+	}
+	else if(E_PLAY_STATE_PAUSE == iCmd)
+	{
+		pOurRtspClient->sendPauseCommand(*pOurRtspClient->m_pSession, NULL);
+	}
+	else if(E_PLAY_STATE_FAST_FORWARD == iCmd)
+	{
+		pOurRtspClient->sendPlayCommand(*pOurRtspClient->m_pSession, NULL,-1,-1,dValue);
+	}
+	else if(E_PLAY_STATE_FAST_REVERSE == iCmd)
+	{
+		pOurRtspClient->sendPlayCommand(*pOurRtspClient->m_pSession, NULL,-1,-1,dValue);
+	}
+	else if(E_PLAY_STATE_DRAG_POS == iCmd)
+	{
+		pOurRtspClient->sendPlayCommand(*pOurRtspClient->m_pSession, NULL,dValue,-1);
+	}
+	else if(E_PLAY_STATE_STOP == iCmd)
+	{
+		pOurRtspClient->sendTeardownCommand(*pOurRtspClient->m_pSession, NULL);
+	}
+	else
+	{
+		return -1;
+	}
+	return 0;
+}
+
+int RTSP_GetRtspTimeout(RTSP_HANDLE RHandle)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return FALSE;
+	}
+	return pOurRtspClient->sessionTimeoutParameter();
+}
+
+int RTSP_GetServIpAddr(RTSP_HANDLE RHandle, char *pcIpAddr, int iLen)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return FALSE;
+	}
+	strncpy(pcIpAddr, pOurRtspClient->m_acIpAddr, iLen);
+	return 0;
+}
+
+int RTSP_GetParam(RTSP_HANDLE RHandle, int iType, void *pValue)
+{
+	
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+
+	if (E_TYPE_PLAY_RANGE == iType)
+	{
+		int *piRangeValue = (int *)pValue;
+
+		*piRangeValue = (int)(pOurRtspClient->m_dduration);
+	}
+
+	return 0;
+}
+
+int RTSP_GetConnect(RTSP_HANDLE RHandle)
+{
+	OurRTSPClient *pOurRtspClient = (OurRTSPClient *)RHandle;
+	if(NULL == pOurRtspClient)
+	{
+		return -1;
+	}
+	
+	return pOurRtspClient->socketNum();
+}

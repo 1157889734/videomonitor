@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VideoMonitor", "VideoMonitor.vcxproj", "{607B1A11-48C2-3702-8610-647EAE2327C5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MBRZip", "MBRZip\MBRZip.vcxproj", "{60F9ECC4-9090-4248-8471-7FF1DE14E9D8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MBRClientUpdate", "MBRClientUpdate\MBRClientUpdate.vcxproj", "{3781A9E3-E25A-4726-93CD-6286B49A8E86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{607B1A11-48C2-3702-8610-647EAE2327C5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{607B1A11-48C2-3702-8610-647EAE2327C5}.Debug|Win32.Build.0 = Debug|Win32
+		{607B1A11-48C2-3702-8610-647EAE2327C5}.Release|Win32.ActiveCfg = Release|Win32
+		{607B1A11-48C2-3702-8610-647EAE2327C5}.Release|Win32.Build.0 = Release|Win32
+		{60F9ECC4-9090-4248-8471-7FF1DE14E9D8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{60F9ECC4-9090-4248-8471-7FF1DE14E9D8}.Debug|Win32.Build.0 = Debug|Win32
+		{60F9ECC4-9090-4248-8471-7FF1DE14E9D8}.Release|Win32.ActiveCfg = Release|Win32
+		{60F9ECC4-9090-4248-8471-7FF1DE14E9D8}.Release|Win32.Build.0 = Release|Win32
+		{3781A9E3-E25A-4726-93CD-6286B49A8E86}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3781A9E3-E25A-4726-93CD-6286B49A8E86}.Debug|Win32.Build.0 = Debug|Win32
+		{3781A9E3-E25A-4726-93CD-6286B49A8E86}.Release|Win32.ActiveCfg = Release|Win32
+		{3781A9E3-E25A-4726-93CD-6286B49A8E86}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

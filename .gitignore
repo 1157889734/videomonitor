@@ -1,0 +1,50 @@
+# Prerequisites
+*.d
+*.sdf
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.tlog
+*.log
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.a
+*.ipch
+*.dll
+*.pdb
+# Fortran module files
+*.mod
+*.smod
+
+# Executables
+*.exe
+*.out
+*.app
+/bin_server_d
+/bin_server_r
+/temp
+/bin
+/GeneratedFiles
+/Win32
+/ipch
+*.rar
+*.tgz
+/debug
+/VideoMonitor
+/SDK/lib/shared
+*.opensdf
+/MBRZip/Debug
+/MBRZip/GeneratedFiles
+/MBRClientUpdate/Release
+/MBRClientUpdate/Debug
+/MBRClientUpdate/GeneratedFiles
+*.manifest
+*.lastbuildstate

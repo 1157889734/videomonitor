@@ -1,0 +1,2767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserMonitor</class>
+ <widget class="QWidget" name="UserMonitor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1173</width>
+    <height>770</height>
+   </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_VideoMonitor">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>58</y>
+     <width>78</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_VideoPlayback">
+   <property name="geometry">
+    <rect>
+     <x>119</x>
+     <y>58</y>
+     <width>78</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>130</y>
+     <width>1111</width>
+     <height>621</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{background:rgb(5,19,80);color:white;}
+QTableWidget {
+selection-color:white;
+background-color: rgb(5,19,80); 
+color: white;
+border: 1px solid rgb(191,191,191);
+gridline-color: rgb(136,136,136);
+}
+QTableWidget::item:unchecked {
+	border:2px solid rgb(128,128,128);
+}
+
+QScrollBar:horizontal{
+background:rgb(5,19,80);
+height: 12px;
+}
+QScrollBar:vertical{
+background:rgb(5,19,80);
+width: 12px;
+}
+QScrollBar::handle{
+background:rgb(33,49,113);
+border-radius:3px;
+}
+/*
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background:rgba(255,255,255,10%);  
+}*/
+QScollBar::add-line,QScrollBar::sub-line
+{
+    background:transparent; 
+}</string>
+   </property>
+   <property name="currentIndex">
+    <number>3</number>
+   </property>
+   <widget class="QWidget" name="page">
+    <widget class="QWidget" name="widget_CarChose" native="true">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>509</y>
+       <width>470</width>
+       <height>115</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="pushButton_Car1">
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car2">
+      <property name="geometry">
+       <rect>
+        <x>93</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car3">
+      <property name="geometry">
+       <rect>
+        <x>141</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car4">
+      <property name="geometry">
+       <rect>
+        <x>189</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car5">
+      <property name="geometry">
+       <rect>
+        <x>237</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car6">
+      <property name="geometry">
+       <rect>
+        <x>285</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car7">
+      <property name="geometry">
+       <rect>
+        <x>333</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Car8">
+      <property name="geometry">
+       <rect>
+        <x>381</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelCarChose">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>20</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="widget_PlayCtrl" native="true">
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>509</y>
+       <width>470</width>
+       <height>115</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="pushButton_prevCar">
+      <property name="geometry">
+       <rect>
+        <x>88</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_nextCar">
+      <property name="geometry">
+       <rect>
+        <x>138</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_pollstart">
+      <property name="geometry">
+       <rect>
+        <x>188</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_pollsuspend">
+      <property name="geometry">
+       <rect>
+        <x>238</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_pantograph">
+      <property name="geometry">
+       <rect>
+        <x>288</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_nextPage">
+      <property name="geometry">
+       <rect>
+        <x>338</x>
+        <y>50</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelPlayCtrl">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>10</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="widget_MonitorWin1">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>3</y>
+       <width>470</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="widget_MonitorWin2">
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>3</y>
+       <width>470</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="widget_MonitorWin3">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>256</y>
+       <width>470</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="widget_MonitorWin4">
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>256</y>
+       <width>470</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page2">
+    <widget class="QWidget" name="widget_BackCarChose" native="true">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>485</y>
+       <width>470</width>
+       <height>140</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="pushButton_BackCar4">
+      <property name="geometry">
+       <rect>
+        <x>422</x>
+        <y>20</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar3">
+      <property name="geometry">
+       <rect>
+        <x>374</x>
+        <y>20</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar2">
+      <property name="geometry">
+       <rect>
+        <x>326</x>
+        <y>20</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar1">
+      <property name="geometry">
+       <rect>
+        <x>278</x>
+        <y>20</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar5">
+      <property name="geometry">
+       <rect>
+        <x>278</x>
+        <y>73</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar6">
+      <property name="geometry">
+       <rect>
+        <x>326</x>
+        <y>73</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar7">
+      <property name="geometry">
+       <rect>
+        <x>374</x>
+        <y>73</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BackCar8">
+      <property name="geometry">
+       <rect>
+        <x>422</x>
+        <y>73</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEditEndTime">
+      <property name="geometry">
+       <rect>
+        <x>112</x>
+        <y>79</y>
+        <width>61</width>
+        <height>35</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEditStartTime">
+      <property name="geometry">
+       <rect>
+        <x>112</x>
+        <y>30</y>
+        <width>61</width>
+        <height>35</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTimeEdit" name="timeEditStartTime">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>30</y>
+        <width>61</width>
+        <height>35</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTimeEdit" name="timeEditEndTime">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>80</y>
+        <width>61</width>
+        <height>35</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelPlayBackCarChose">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>10</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="widget_BackPlayCtrl" native="true">
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>485</y>
+       <width>470</width>
+       <height>140</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="pushButton_play">
+      <property name="geometry">
+       <rect>
+        <x>94</x>
+        <y>40</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_suspend">
+      <property name="geometry">
+       <rect>
+        <x>142</x>
+        <y>40</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_back">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>40</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_forward">
+      <property name="geometry">
+       <rect>
+        <x>238</x>
+        <y>40</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Backpantograph">
+      <property name="geometry">
+       <rect>
+        <x>286</x>
+        <y>40</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_BacknextPage">
+      <property name="geometry">
+       <rect>
+        <x>334</x>
+        <y>40</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_DayPlayBack">
+      <property name="geometry">
+       <rect>
+        <x>94</x>
+        <y>90</y>
+        <width>141</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_MonthPlayBack">
+      <property name="geometry">
+       <rect>
+        <x>238</x>
+        <y>90</y>
+        <width>141</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelPlayBackCarCtrl">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>10</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="widget_PlayBackWin1">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>3</y>
+       <width>470</width>
+       <height>238</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="widget_PlayBackWin2">
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>3</y>
+       <width>470</width>
+       <height>238</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="widget_PlayBackWin3">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>244</y>
+       <width>470</width>
+       <height>238</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="widget_PlayBackWin4">
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>244</y>
+       <width>470</width>
+       <height>238</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page3">
+    <widget class="QWidget" name="widget_DownloadSet" native="true">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>3</y>
+       <width>541</width>
+       <height>480</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QDateTimeEdit
+{
+	border:2px solid rgb(128,128,128);
+    border-radius:4px;
+}
+QDateTimeEdit::up-button
+{
+    width:32px;
+    border-image: url(:/res/res/add.png);
+}
+QDateTimeEdit::down-button
+{
+	width:32px;
+	border-image: url(:/res/res/reduce.png);
+}
+QComboBox {
+      border: 1px solid gray;
+      border-radius: 3px;
+}
+QHeaderView::section {
+      color: white;
+      padding-left: 4px;
+      border: 1px solid #6c6c6c;
+      background-color: rgb(5,19,80);
+}
+QCheckBox::indicator:unchecked {
+	width:32px;height:32px;
+	image: url(:/res/res/btn_check_off_focused_holo_light.png);
+}
+QCheckBox::indicator:checked {
+	width:32px;height:32px;
+	image: url(:/res/res/btn_check_on_focused_holo_light.png);
+}
+QTableWidget::item{height:48px;}
+QTableWidget::item:selected{
+background:#646464;
+}
+QTableWidget::indicator:unchecked
+{
+	width:48px;height:48px;
+	image: url(:/res/res/btn_check_off_focused_holo_light.png);
+}
+QTableWidget::indicator:checked
+{
+	width:48px;height:48px;
+	image: url(:/res/res/btn_check_on_focused_holo_light.png);
+}</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="0">
+       <widget class="QTableWidget" name="tableWidgetFileList">
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="rowCount">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="labelFileList">
+          <property name="font">
+           <font>
+            <family>黑体</family>
+           </font>
+          </property>
+          <property name="text">
+           <string>文件列表：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>168</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxSelectAllfiles">
+          <property name="text">
+           <string>全选</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>20</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <family>黑体</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>下载时间段设置：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>开始日期
+         时间</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateTimeEdit" name="dateEditDownloadStartTime">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd hh:mm:ss</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>结束日期
+         时间</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateTimeEdit" name="dateEditDownloadEndTime">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd hh:mm:ss</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelLocationSet">
+            <property name="font">
+             <font>
+              <family>黑体</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>位置设置：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1,0,0,1">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>车厢</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxCarriageSelect">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>32</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>摄像机</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxCameraSelect">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>32</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>68</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonStartQuery">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>78</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <widget class="QProgressBar" name="progressBar_downLoad">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>12</height>
+         </size>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="widget_VideoDownloadWin">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>3</y>
+       <width>581</width>
+       <height>521</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QWidget" name="widgetDownloadCtrl" native="true">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>560</y>
+       <width>901</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="pushButtonDownloadLastFile">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonDownloadBack">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonDownloadPlay">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonDownloadStop">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonDownloadForward">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonDownloadNextFile">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonDownload">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>10</y>
+        <width>45</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QSlider" name="horizontalSlider">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>540</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page4">
+    <widget class="QStackedWidget" name="stackedWidget2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>57</y>
+       <width>871</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page_2">
+      <widget class="QWidget" name="Widget6CarriageStatus" native="true">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>30</y>
+         <width>761</width>
+         <height>461</height>
+        </rect>
+       </property>
+       <widget class="QPushButton" name="pushButtonCar1DriverAlarm">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar1NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>60</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar1Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar1Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar1Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>110</y>
+          <width>21</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar2PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>10</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar2NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>60</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar2Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>110</y>
+          <width>21</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar2Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar2Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar3NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>70</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar3Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar3Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar3Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>110</y>
+          <width>21</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar4NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar4Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar4Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar4Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar5PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>190</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar5Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar5NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar5Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar5Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar6NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar6Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar6Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar6Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>270</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar6DriverAlarm">
+        <property name="geometry">
+         <rect>
+          <x>580</x>
+          <y>240</y>
+          <width>41</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar3PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>20</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCar4PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>190</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_3">
+      <widget class="QWidget" name="Widget8CarriageStatus" native="true">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>30</y>
+         <width>691</width>
+         <height>401</height>
+        </rect>
+       </property>
+       <widget class="QPushButton" name="pushButton8Car1DriverAlarm">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>90</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car1NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>70</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car1Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car1Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car1Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car2PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>30</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car2NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>70</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car2Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car2Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car2Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car3NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>70</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car3Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car3Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car3Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car4NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>510</x>
+          <y>70</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car4Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car4Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>520</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car4Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>560</x>
+          <y>110</y>
+          <width>41</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car5PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>180</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car5NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car5Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car5Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car5Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car6NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car6Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car6Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>280</y>
+          <width>21</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car6Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car7PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>180</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car7NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car7Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car7Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car7Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car8NVRAlarm">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>230</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car8Alarm1">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car8Alarm2">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car8Alarm3">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>280</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car8DriverAlarm">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>250</y>
+          <width>41</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car3PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>30</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car4PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>510</x>
+          <y>30</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton8Car6PantoAlarm">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>180</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_4">
+      <widget class="QTableWidget" name="tableWidgetSaveStatus">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>9</y>
+         <width>256</width>
+         <height>192</height>
+        </rect>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_5">
+      <widget class="QTableWidget" name="tableWidgetAlarmList">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>9</y>
+         <width>256</width>
+         <height>192</height>
+        </rect>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButtonSaveStatus">
+     <property name="geometry">
+      <rect>
+       <x>829</x>
+       <y>11</y>
+       <width>48</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonAlarmList">
+     <property name="geometry">
+      <rect>
+       <x>883</x>
+       <y>11</y>
+       <width>48</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_6">
+    <widget class="QWidget" name="widgetUpdate" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>261</width>
+       <height>610</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+border:2px solid rgb(128,128,128);
+}
+QRadioButton:indicator{border-image: url(:/res/res/btn_radio_off_holo_light.png);width:48px;height:48px;}
+QRadioButton:indicator::checked{border-image: url(:/res/res/btn_radio_on_holo_light.png);width:48px;height:48px;}
+QPushButton{color:white;background-color:rgb(20,56,105);}</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_9">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <property name="spacing">
+         <number>30</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="spacing">
+           <number>15</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>视频监控轮循时间:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="spacing">
+             <number>20</number>
+            </property>
+            <item>
+             <widget class="QRadioButton" name="radioButton10s">
+              <property name="text">
+               <string>10秒</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton20s">
+              <property name="text">
+               <string>20秒</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton30s">
+              <property name="text">
+               <string>30秒</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QRadioButton" name="radioButtonCustomDefine">
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="text">
+               <string>自定义</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditPollTIme">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::StrongFocus</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>秒</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonSetPollTIme">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>27</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>27</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>设置轮询</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>15</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>系统时间：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="labelSystemTime">
+              <property name="text">
+               <string>2019-10-07 22:37:34 </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateTimeEdit" name="dateTimeEdit_SetDT">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QDateTimeEdit
+{
+	border:2px solid rgb(128,128,128);
+    border-radius:4px;
+}
+QDateTimeEdit::up-button
+{
+    width:32px;
+    border-image: url(:/res/res/add.png);
+}
+QDateTimeEdit::down-button
+{
+	width:32px;
+	border-image: url(:/res/res/reduce.png);
+}</string>
+              </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd hh:mm:ss</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <property name="spacing">
+               <number>2</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="pushButtonSetTime">
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>27</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>27</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>手工校时</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonSetTimeCancel">
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>27</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>27</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>取消</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>15</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>当前车次:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="lineEditCar"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonCarriageQuery">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>27</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>27</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>设置车次</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>用户管理</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButtonAddUser">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>27</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>27</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>新增用户</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>系统</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_version">
+           <property name="text">
+            <string>V1.0.2D</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>20</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButtonSysUpdate">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>27</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>27</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>系统</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonReboot">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>27</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>27</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>重启</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_update">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QTableWidget" name="tableWidgetPower">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>10</y>
+       <width>591</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectItems</enum>
+     </property>
+     <property name="rowCount">
+      <number>25</number>
+     </property>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_VideoDownload">
+   <property name="geometry">
+    <rect>
+     <x>198</x>
+     <y>58</y>
+     <width>78</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_DeviceStaus">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>60</y>
+     <width>78</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Update">
+   <property name="geometry">
+    <rect>
+     <x>870</x>
+     <y>60</y>
+     <width>78</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelRealTime">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>54</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButtonExit">
+   <property name="geometry">
+    <rect>
+     <x>1040</x>
+     <y>10</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButtonCancel">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>10</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

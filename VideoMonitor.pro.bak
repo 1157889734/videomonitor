@@ -1,0 +1,138 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2020-10-16T00:58:23
+#
+#-------------------------------------------------
+
+QT       += core gui sql
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = VideoMonitor
+TEMPLATE = app
+
+#DESTDIR = bin
+OBJECTS_DIR = temp/obj
+UI_DIR = temp/ui
+MOC_DIR = temp/moc
+
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += _WIN32 _WINDOWS WIN
+QMAKE_CFLAGS += -g -O0
+QMAKE_CXXFLAGS += -g  -O0
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+
+SOURCES += \
+        main.cpp \
+        mainwindow.cpp \
+    testform.cpp \
+    GlobleDefine.cpp \
+    Keyboard.cpp \
+    LoginSystem.cpp \
+    MySystem.cpp \
+    SingleVideo.cpp \
+    UserMonitor.cpp \
+    UserRegister.cpp \
+    mainsdk.cpp \
+    NVRMsgProc.cxx \
+    SDK/CMPlayer/mutex.cpp \
+    SDK/CMPlayer/render.cpp \
+    SDK/CMPlayer/vdec.cpp \
+    SDK/state/fileConfig.c \
+    SDK/state/state.c \
+    datetimesetwidget.cpp \
+    SDK/ftp/ftpApi.c \
+    SDK/ftp/gb2312_utf8.c \
+    SDK/CMPlayer/CMPlayerInterface.cpp \
+    workerthread.cpp \
+    SDK/rtsp/Base64EncDec.c \
+    SDK/rtsp/md5.c \
+    SDK/rtsp/ourMD5.c \
+    SDK/rtsp/rtcp.c \
+    SDK/rtsp/rtp.c \
+    SDK/rtsp/rtsp.c \
+    SDK/rtsp/rtspApi.c \
+    SDK/rtsp/rtspComm.c \
+    singleform.cpp \
+
+HEADERS += \
+        mainwindow.h \
+    testform.h \
+    define.h \
+    GlobleDefine.h \
+    Keyboard.h \
+    LoginSystem.h \
+    MySystem.h \
+    SingleVideo.h \
+    UserMonitor.h \
+    UserRegister.h \
+    mainsdk.h \
+    NVRMsgProc.h \
+    SDK/CMPlayer/CommonDefine.h \
+    SDK/CMPlayer/mutex.h \
+    SDK/CMPlayer/render.h \
+    SDK/CMPlayer/vdec.h \
+    SDK/state/fileConfig.h \
+    SDK/state/state.h \
+    datetimesetwidget.h \
+    SDK/ftp/ftpApi.h \
+    SDK/ftp/gb2312_utf8.h \
+    SDK/CMPlayer/CMPlayerInterface.h \
+    workerthread.h \
+    SDK/rtsp/Base64EncDec.h \
+    SDK/rtsp/md5.h \
+    SDK/rtsp/mutex.h \
+    SDK/rtsp/ourMD5.h \
+    SDK/rtsp/rtcp.h \
+    SDK/rtsp/rtp.h \
+    SDK/rtsp/rtsp.h \
+    SDK/rtsp/rtspApi.h \
+    SDK/rtsp/rtspComm.h \
+    singleform.h \
+
+FORMS += \
+        mainwindow.ui \
+    testform.ui \
+    Keyboard.ui \
+    LoginSystem.ui \
+    MyMonitor.ui \
+    MySystem.ui \
+    SingleVideo.ui \
+    UserMonitor.ui \
+    UserRegister.ui \
+    datetimesetwidget.ui \
+    singleform.ui
+
+
+
+INCLUDEPATH += $$PWD/SDK/include $$PWD/SDK/include/SDL2
+DEPENDPATH += $$PWD/SDK/lib
+DEPENDPATH += $$PWD/SDK/lib/win32/static
+contains(DEFINES, _WIN32){
+QT += network
+LIBS +=-L$$PWD/SDK/lib/win32/static  -lCmplay 
+}else{
+
+LIBS += -L$$PWD/SDK/lib/shared  -ldl -lSDL2 -lavformat -lavcodec -lavdevice -lavfilter  -lavutil -lswscale -lswresample -lpthread
+LIBS +=
+
+}
+#CONFIG(release, debug|release): LIBS += -L$$PWD/SDK/lib/ -lrtsp
+
+
+RESOURCES += \
+    imag.qrc
+
+DISTFILES += \
+    loco.rc \
+    SDK/rtsp/rtcp.o
+
+
